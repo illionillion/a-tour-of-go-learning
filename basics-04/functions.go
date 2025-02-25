@@ -6,7 +6,8 @@ func add(x int, y int) int {
 	return x + y
 }
 
-func substruct(x int, y int) int {
+// 型が同じなら省略できる
+func substruct(x, y int) int {
 	return x - y
 }
 
