@@ -16,7 +16,7 @@ func main() {
 	for {
 		num := rand.Intn(100)       // 乱数を変数に格納
 		fmt.Println("生成された値:", num) // 乱数の値を出力
-		if num%3 != 0 {
+		if mod := num % 3; mod != 0 {
 			break // 3の倍数でなければループを抜ける
 		}
 		fmt.Println("ループ")
