@@ -14,7 +14,7 @@ func main() {
 		40.68433, -74.39967,
 	}
 	m["Tokyo"] = Vertex{
-		35.6895, 139.6917,
+		Lat: 35.6895, Long: 139.6917,
 	}
 	for name, vertex := range m {
 		fmt.Printf("%s: %+v\n", name, vertex)
