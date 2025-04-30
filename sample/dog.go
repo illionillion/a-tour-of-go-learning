@@ -1,67 +1,44 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
+// Animalインターフェース：外部に公開されたメソッドだけ
+type Animal interface {
+	Call()
+	GetName() string
+	GetAge() int
+}
+
+// Dog構造体：name, age は外から触れないように小文字
 type Dog struct {
-	Name string
-	Age  int
+	name string
+	age  int
 }
 
-func (d Dog) Bark() {
-	println("Woof! My name is", d.Name)
+// コンストラクタ関数（外部からdogを生成する唯一の方法）
+func NewDog(name string, age int) Animal {
+	return &Dog{name: name, age: age}
 }
-func (d Dog) GetAge() int {
-	return d.Age
+
+// インターフェースを満たすメソッド群
+func (d *Dog) Call() {
+	fmt.Printf("Woof! I'm %s (%d years old)\n", d.name, d.age)
 }
-func (d Dog) SetAge(age int) {
-	d.Age = age
+
+func (d *Dog) GetName() string {
+	return d.name
 }
-func (d Dog) GetName() string {
-	return d.Name
-}
-func (d Dog) SetName(name string) {
-	d.Name = name
-}
-func (d Dog) String() string {
-	return "Dog{" + d.Name + ", " + fmt.Sprint(d.Age) + "}"
-}
-func (d Dog) Speak() {
-	println("Woof! My name is", d.Name)
-}
-func (d Dog) Eat() {
-	println("Eating...")
-}
-func (d Dog) Sleep() {
-	println("Sleeping...")
-}
-func (d Dog) Play() {
-	println("Playing...")
-}
-func (d Dog) Fetch() {
-	println("Fetching...")
-}
-func (d Dog) Sit() {
-	println("Sitting...")
-}
-func (d Dog) RollOver() {
-	println("Rolling over...")
+
+func (d *Dog) GetAge() int {
+	return d.age
 }
 
 func main() {
-	dog := Dog{Name: "Buddy", Age: 3}
-	dog.Bark()
-	dog.SetAge(4)
-	println("Dog's age:", dog.GetAge())
-	dog.SetName("Max")
-	println("Dog's name:", dog.GetName())
-	println(dog.String())
-	dog.Speak()
-	dog.Eat()
-	dog.Sleep()
-	dog.Play()
-	dog.Fetch()
-	dog.Sit()
-	dog.RollOver()
+	// Animal型として使用 → 外部からはdogのフィールドに触れない
+	myDog := NewDog("Pochi", 3)
+	myDog.Call()
 
+	// fmt.Println(myDog.name) // コンパイルエラー：nameは非公開
 }
-
